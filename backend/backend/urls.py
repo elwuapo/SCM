@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from api.v1.sign.Sign import SignIn
+from knox import views as KnoxViews
 
 urlpatterns = [
     #ADMIN
@@ -25,4 +26,7 @@ urlpatterns = [
     # SIGNIN
     path('api/v1/signin/', SignIn.as_view()),                       # POST 
 
-]
+    # SIGNOUT
+    path('api/v1/signout/', KnoxViews.LogoutView.as_view()),        # POST                     
+    path('api/v1/signout/all/', KnoxViews.LogoutAllView.as_view()), # POST
+]   
