@@ -10,7 +10,7 @@ import Cookies from 'universal-cookie';
 
 // Files
 import logo from '../../../image/logo/logo.jpg';
-import { baseApi } from '../../../setting/Setting';
+import { urlApi } from '../../../setting/Setting';
 import { style, theme } from './Style';
 
 
@@ -39,7 +39,7 @@ export const SignIn = () => {
             redirect: 'follow'
         };
 
-        const data = await fetch(baseApi() + "api/v1/signin/", request);
+        const data = await fetch(urlApi() + "api/v1/signin/", request);
 
         switch(data.status){
             case 200:

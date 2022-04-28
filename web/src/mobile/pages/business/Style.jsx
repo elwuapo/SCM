@@ -22,4 +22,9 @@ export const white = makeStyles((theme) => ({
         textOverFlow: 'ellipsis',
         whiteSpace: 'nowrap',
     },
+    title:{
+        width: 'calc(100vw - 40px)',
+        paddingLeft: 20,
+        paddingRight: 20,
+    }
 }));
