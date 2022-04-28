@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from api.v1.sign.Sign import SignIn
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #ADMIN
+    path('admin/', admin.site.urls),                                # GET
+
+    # SIGNIN
+    path('api/v1/signin/', SignIn.as_view()),                       # POST 
+
 ]
