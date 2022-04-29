@@ -13,12 +13,14 @@ import Cookies from 'universal-cookie';
 // Files
 import { white } from './Style';
 import { Exit } from '../dropdown/Exit';
+import { urlApi } from '../../../setting/Setting';
 
 export const Menu = () => {
     const classes  = white();
     const cookies  = new Cookies();
     const username = cookies.get('user');
     const avatar   = cookies.get('avatar');
+    const role     = cookies.get('role');
 
     return (
         <Fragment>
@@ -45,9 +47,9 @@ export const Menu = () => {
 
             <Card className={classes.card}>
                 <CardHeader
-                    avatar={<Avatar src={avatar}/>}
+                    avatar={<Avatar src={urlApi() + avatar}/>}
                     title={username}
-                    subheader={"manager"}
+                    subheader={role}
                     action={<Exit options={['SignOut', 'SignOut All']}/>}
                 />
             </Card>

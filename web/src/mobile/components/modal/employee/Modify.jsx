@@ -94,8 +94,8 @@ export const Modify = () => {
                                     </FormControl>
 
                                     <FormControl variant="outlined" fullWidth>
-                                        <InputLabel id='label-rol' color='success' required>rol</InputLabel>
-                                        <Select variant="outlined" labelId="label-rol" value={1} color="success" label="rol" required>
+                                        <InputLabel id='label-role' color='success' required>role</InputLabel>
+                                        <Select variant="outlined" labelId="label-role" value={1} color="success" label="role" required>
                                             <MenuItem value={1}>Employee</MenuItem>
                                             <MenuItem value={2}>Manager</MenuItem>
                                         </Select>

@@ -13,6 +13,7 @@ export const white = makeStyles((theme) => ({
     collapse:{
         paddingLeft: 20,
         paddingRight: 20,
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
     },
     table:{
         background: grey[50],

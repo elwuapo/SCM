@@ -2,10 +2,77 @@ import { Dialog, DialogContent, DialogContentText, DialogTitle, Divider, FormCon
 import React, { Fragment, useState } from 'react'
 import { white } from './Style';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import Cookies from 'universal-cookie';
+import { clearCookies, urlApi } from '../../../../setting/Setting';
 
-export const Add = () => {
+export const Add = (props) => {
     const classes = white();
-    const [open, setOpen] = useState(false);
+
+    const [open, setOpen]           = useState(false);
+    const [username, setUsername]   = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname]   = useState('');
+    const [email, setEmail]         = useState('');
+    const [role, setRole]           = useState('employee');
+    const [avatar, setAvatar]       = useState(null);
+    const [disable, setDisable]     = useState(false)
+
+    const adding = async (event) => {
+        event.preventDefault();
+        setDisable(true);
+
+        const header     = new Headers();
+        const formdata   = new FormData();
+        const cookies    = new Cookies();
+        const token      = cookies.get("token");
+        const businessId = cookies.get("businessId");
+
+        header.append("Authorization", "Token " + token);
+
+        formdata.append("username", username);
+        formdata.append("first_name", firstname);
+        formdata.append("last_name", lastname);
+        formdata.append("email", email);
+        formdata.append("avatar", avatar, 'avatar.jpg');
+        formdata.append("role", role);
+        formdata.append("businessId", businessId);
+        
+
+        const request = {
+            method: 'POST',
+            headers: header,
+            body: formdata,
+            redirect: 'follow'
+        }
+
+        const data = await fetch(urlApi() + '/api/v1/account/', request);
+
+        switch(data.status){
+            case 200:
+                const response = await data.json();
+                props.setEmployees((prev) => [...prev, response.account])
+                setOpen(false);
+                break;
+            case 401:
+                clearCookies();
+                break;
+            default:
+                break;
+        };
+
+        setDisable(false);
+    };
+
+    const canceling = () => {
+        setOpen(false);
+        setUsername('');
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+        setRole('employee');
+        setAvatar(null);
+        setDisable(false);
+    }
 
     return (
         <Fragment>
@@ -19,7 +86,7 @@ export const Add = () => {
                 maxWidth={'xs'}
                 PaperProps={{style:{borderRadius: 10, opacity: 0.9, backgroundColor: '#fff'}}}
             >
-                <form onSubmit={() => {}}>
+                <form onSubmit={(event) => adding(event)}>
                     <DialogTitle>
                         <center>
                             <b>Add</b>
@@ -46,7 +113,8 @@ export const Add = () => {
                                             variant="outlined"
                                             color="success"
                                             style={{width: '100%', marginBottom: 10}}
-                                            value={'nrivera'}
+                                            value={username}
+                                            onChange={event => setUsername(event.target.value)}
                                         />
                                     </FormControl>
                                 
@@ -61,7 +129,8 @@ export const Add = () => {
                                             variant="outlined"
                                             color="success"
                                             style={{width: '100%', marginBottom: 10}}
-                                            value={'Nicolás'}
+                                            value={firstname}
+                                            onChange={event => setFirstname(event.target.value)}
                                         />
                                     </FormControl>
 
@@ -76,7 +145,8 @@ export const Add = () => {
                                             variant="outlined"
                                             color="success"
                                             style={{width: '100%', marginBottom: 10}}
-                                            value={'Rivera'}
+                                            value={lastname}
+                                            onChange={event => setLastname(event.target.value)}
                                         />
                                     </FormControl>
                                     <FormControl fullWidth>
@@ -90,23 +160,25 @@ export const Add = () => {
                                             variant="outlined"
                                             color="success"
                                             style={{width: '100%', marginBottom: 10}}
-                                            value={'nrivera@email.com'}
+                                            value={email}
+                                            onChange={event => setEmail(event.target.value)}
                                         />
                                     </FormControl>
 
                                     <FormControl variant="outlined" fullWidth>
-                                        <InputLabel id='label-rol' color='success' required>rol</InputLabel>
+                                        <InputLabel id='label-role' color='success' required>role</InputLabel>
                                         <Select
                                             required
                                             variant="outlined" 
-                                            labelId="label-rol" 
-                                            value={1} 
+                                            labelId="label-role" 
+                                            value={role} 
                                             color="success" 
                                             label="rol" 
                                             style={{width: '100%', marginBottom: 10}}
+                                            onChange={event => setRole(event.target.value)}
                                         >
-                                            <MenuItem value={1}>Employee</MenuItem>
-                                            <MenuItem value={2}>Manager</MenuItem>
+                                            <MenuItem value={'employee'}>Employee</MenuItem>
+                                            <MenuItem value={'manager'}>Manager</MenuItem>
                                         </Select>
                                     </FormControl>
 
@@ -116,7 +188,7 @@ export const Add = () => {
                                             type="file"
                                             variant="outlined"
                                             inputProps={{ accept: 'image/jpeg' }}
-                                            //onChange={(event) => setImagen(event.target.files[0])}
+                                            onChange={(event) => setAvatar(event.target.files[0])}
                                             color="success"
                                         />
                                     </FormControl>
@@ -126,11 +198,11 @@ export const Add = () => {
                     </DialogContent>
                     <List>
                         <Divider/>
-                        <ListItem autoFocus button onClick={() => {}}>
+                        <ListItem autoFocus button onClick={(event) => adding(event)} disabled={disable}>
                             <ListItemText primary={<Typography type="body2" style={{ textAlign: 'center'}}>Add</Typography>}/>
                         </ListItem>
                         <Divider/>
-                        <ListItem autoFocus button onClick={() => setOpen(false)}>
+                        <ListItem autoFocus button onClick={() => canceling()}>
                             <ListItemText primary={<Typography type="body2" style={{ textAlign: 'center'}}>Cancel</Typography>}/>
                         </ListItem>
                     </List>

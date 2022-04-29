@@ -39,13 +39,16 @@ export const SignIn = () => {
             redirect: 'follow'
         };
 
-        const data = await fetch(urlApi() + "api/v1/signin/", request);
+        const data = await fetch(urlApi() + "/api/v1/signin/", request);
 
         switch(data.status){
             case 200:
                 const response = await data.json();
                 cookies.set("user", response.user.username, {path: '/' , expires: new Date(response.expiry), sameSite: "strict"});
                 cookies.set("token", response.token, {path: '/' , expires: new Date(response.expiry), sameSite: "strict"});
+                cookies.set("role", response.role, {path: '/', expires: new Date(response.expiry), sameSite: "strict"});
+                cookies.set("avatar", response.avatar, {path: '/', expires: new Date(response.expiry), sameSite: "strict"});
+                cookies.set("businessId", response.businessId, {path: '/', expires: new Date(response.expiry), sameSite: "strict"});
                 cookies.set("expanded", true, {path: '/', expires: new Date(response.expiry), sameSite: "strict"});
                 window.location.href = "/";
                 break;

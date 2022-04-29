@@ -2,7 +2,7 @@
 import React, { Fragment, useState } from 'react';
 
 // Material-UI
-import { Avatar, Card, CardHeader, Collapse, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Avatar, Card, CardHeader, Collapse, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
@@ -12,8 +12,9 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { white } from './Style';
 import { Delete } from '../modal/employee/Delete';
 import { Modify } from '../modal/employee/Modify';
+import { urlApi } from '../../../setting/Setting';
 
-export const Employee = () => {
+export const Employee = (props) => {
     const classes = white();
 
     const [open, setOpen] = useState(false);
@@ -21,9 +22,9 @@ export const Employee = () => {
         <Fragment>
             <Card className={classes.card}>
                 <CardHeader 
-                    avatar={<Avatar />}
-                    title={'username'}
-                    subheader={'rol'}
+                    avatar={<Avatar src={urlApi() + props.employee.avatar}/>}
+                    title={props.employee.user.first_name + ' ' + props.employee.user.last_name}
+                    subheader={props.employee.role}
                     action={
                         <IconButton onClick={() => setOpen(!open)}>
                             { open ? <ExpandLessIcon fontSize='small'/> : <ExpandMoreIcon fontSize='small'/> }
@@ -44,41 +45,13 @@ export const Employee = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Monday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Tuesday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Wednesday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Thursday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Friday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Saturday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">Sunday</TableCell>
-                                <TableCell>09:00hrs</TableCell>
-                                <TableCell>18:00hrs</TableCell>
-                            </TableRow>
+                            { props.employee.working_hours.workday.map((workday, index) =>
+                                <TableRow>
+                                    <TableCell component="th" scope="row">{workday.day}</TableCell>
+                                    <TableCell>{workday.check_in_time.substring(0,5) + ' hrs'}</TableCell>
+                                    <TableCell>{workday.departure_time.substring(0,5) + ' hrs'}</TableCell>
+                                </TableRow>
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -86,8 +59,6 @@ export const Employee = () => {
                 <Modify />
 
                 <Delete />
-
-                <Divider />
             </Collapse>
         </Fragment>
     )
