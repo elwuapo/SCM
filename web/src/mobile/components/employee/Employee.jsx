@@ -45,20 +45,28 @@ export const Employee = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            { props.employee.working_hours.workday.map((workday, index) =>
+                            { props.employee.working_hours.workday.length < 1 ?
                                 <TableRow>
-                                    <TableCell component="th" scope="row">{workday.day}</TableCell>
-                                    <TableCell>{workday.check_in_time.substring(0,5) + ' hrs'}</TableCell>
-                                    <TableCell>{workday.departure_time.substring(0,5) + ' hrs'}</TableCell>
+                                    <TableCell align="center" colSpan={3}><center>No assignment</center></TableCell>
                                 </TableRow>
-                            )}
+                                :
+                                <Fragment>
+                                    { props.employee.working_hours.workday.map((workday, index) =>
+                                        <TableRow key={index}>
+                                            <TableCell component="th" scope="row">{workday.day}</TableCell>
+                                            <TableCell>{workday.check_in_time.substring(0,5) + ' hrs'}</TableCell>
+                                            <TableCell>{workday.departure_time.substring(0,5) + ' hrs'}</TableCell>
+                                        </TableRow>
+                                    )}
+                                </Fragment>
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
 
-                <Modify />
+                <Modify employee={props.employee} setEmployees={props.setEmployees} employees={props.employees}/>
 
-                <Delete />
+                <Delete employee={props.employee} setEmployees={props.setEmployees}/>
             </Collapse>
         </Fragment>
     )

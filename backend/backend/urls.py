@@ -36,7 +36,7 @@ urlpatterns = [
     path('api/v1/signout/all/', KnoxViews.LogoutAllView.as_view()), # POST
 
     # BUSINESS
-    path('api/v1/account/', AccountAPI.as_view()),                  # POST 
+    path('api/v1/account/', AccountAPI.as_view()),                  # POST, PUT, DELETE
 
     # BUSINESS
     path('api/v1/business/<int:pk>/', BusinessAPI.as_view()),       # GET 

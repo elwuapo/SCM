@@ -44,7 +44,6 @@ export const Business = () => {
                 setBusiness(response.business);
                 setEmployees(response.business.employees);
                 setLoading(false);
-                console.log(response);
                 break;
             case 401:
                 clearCookies();
@@ -75,7 +74,7 @@ export const Business = () => {
                             </h3>
 
                             { employees.map((employee, index) => 
-                                <Employee key={index} employee={employee} />
+                                <Employee key={index} employee={employee} setEmployees={setEmployees} employees={employees}/>
                             )}
                         </Fragment>
                     }

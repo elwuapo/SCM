@@ -50,4 +50,14 @@ export const white = makeStyles((theme) => ({
         paddingRight: 10,
         textAlign: 'center'
     },
+    image:{
+        width: '20vw', 
+        height: '20vw', 
+        borderRadius: '100%', 
+        marginBottom: 10,
+        cursor: 'pointer',
+    },
+    input:{
+        display: 'none',
+    }
 }));
