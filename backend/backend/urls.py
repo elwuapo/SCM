@@ -23,6 +23,7 @@ from knox import views as KnoxViews
 
 from api.v1.business.Business import BusinessAPI
 from api.v1.account.Account import AccountAPI
+from api.v1.mark.Mark import MarkAPI
 
 urlpatterns = [
     #ADMIN
@@ -35,11 +36,14 @@ urlpatterns = [
     path('api/v1/signout/', KnoxViews.LogoutView.as_view()),        # POST                     
     path('api/v1/signout/all/', KnoxViews.LogoutAllView.as_view()), # POST
 
-    # BUSINESS
+    # ACCOUNT
     path('api/v1/account/', AccountAPI.as_view()),                  # POST, PUT, DELETE
 
     # BUSINESS
-    path('api/v1/business/<int:pk>/', BusinessAPI.as_view()),       # GET 
+    path('api/v1/business/<int:pk>/', BusinessAPI.as_view()),       # GET
+
+    # MARK
+    path('api/v1/mark/', MarkAPI.as_view()),                        # POST
 ]   
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

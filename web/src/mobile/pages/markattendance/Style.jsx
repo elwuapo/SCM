@@ -27,7 +27,9 @@ export const white = makeStyles((theme) => ({
         width: '100%', 
         height: 'auto', 
         borderRadius: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        cursor: 'pointer',
+        aspectRatio: '1/1',
     },
     table:{
         background: grey[50],
@@ -43,4 +45,7 @@ export const white = makeStyles((theme) => ({
             background: blue[700],
         }
     },
+    input:{
+        display: 'none',
+    }
 }));
