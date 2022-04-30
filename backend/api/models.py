@@ -25,9 +25,13 @@ class Browser(models.Model):
     os = models.CharField(max_length=20)
 
 class Mark(models.Model):
+    def path(self, filename):
+        return f'photos/{filename}'
+        
+    photo = models.ImageField(upload_to = path, null = True, blank = True)
     place = models.CharField(max_length=99)
     check_in_time = models.DateTimeField(auto_now_add=True)
-    departure_time = models.DateTimeField(auto_created=True)
+    departure_time = models.DateTimeField(null=True, blank=True)
     browser = models.ForeignKey(Browser, on_delete = models.CASCADE)
 
 class Account(models.Model):
