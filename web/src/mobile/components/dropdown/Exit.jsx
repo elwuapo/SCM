@@ -67,7 +67,7 @@ export const Exit = (props) => {
             redirect: 'follow'
         };
 
-        const data = await fetch(urlApi() + "api/v1/signout/all/", request);
+        const data = await fetch(urlApi() + "/api/v1/signout/all/", request);
 
         switch(data.status){
             case 204:

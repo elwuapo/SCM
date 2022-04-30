@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Attendance } from '../mobile/pages/attendance/Attendance';
 import { Business } from '../mobile/pages/business/Business';
 import { Home } from '../mobile/pages/home/Home';
+import { Markattendance } from '../mobile/pages/markattendance/Markattendance';
 import { SignIn } from '../mobile/pages/sign/SignIn';
 
 export const PathMobile = (props) => {
@@ -35,6 +36,11 @@ export const PathMobile = (props) => {
 					<Route 
 						path="/attendance"  
 						render={() => authenticated ? <Attendance key={Date.now()}/> : <SignIn  key={Date.now()}/>}    
+						exact 
+					/>
+					<Route 
+						path="/mark-attendance"  
+						render={() => authenticated ? <Markattendance key={Date.now()}/> : <SignIn  key={Date.now()}/>}    
 						exact 
 					/>
 				</Switch>

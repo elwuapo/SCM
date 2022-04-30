@@ -15,6 +15,9 @@ const cookies = new Cookies();
 export const clearCookies = () => {
     cookies.remove("user");
     cookies.remove("token");
+    cookies.remove("role");
+    cookies.remove("avatar");
+    cookies.remove("businessId");
     cookies.remove("expanded");
     window.location.href = "/signin";
 };

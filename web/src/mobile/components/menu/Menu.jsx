@@ -22,10 +22,14 @@ export const Menu = () => {
     const avatar   = cookies.get('avatar');
     const role     = cookies.get('role');
 
+    const going = (path) => {
+        window.location.href = path;
+    }
+    
     return (
         <Fragment>
             <List>
-                <ListItem button>
+                <ListItem button onClick={() => going('/mark-attendance')}>
                     <ListItemIcon className={classes.icono}>
                         <PhotoCameraIcon style={{color: '#9e9e9e'}}/>
                     </ListItemIcon>
