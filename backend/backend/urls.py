@@ -43,7 +43,7 @@ urlpatterns = [
     path('api/v1/business/<int:pk>/', BusinessAPI.as_view()),       # GET
 
     # MARK
-    path('api/v1/mark/', MarkAPI.as_view()),                        # POST
+    path('api/v1/mark/', MarkAPI.as_view()),                        # GET, POST
 ]   
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
