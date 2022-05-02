@@ -9,6 +9,7 @@ import { Attendance } from '../mobile/pages/attendance/Attendance';
 import { Business } from '../mobile/pages/business/Business';
 import { Home } from '../mobile/pages/home/Home';
 import { Markattendance } from '../mobile/pages/markattendance/Markattendance';
+import { Schedule } from '../mobile/pages/schedule/Schedule';
 import { SignIn } from '../mobile/pages/sign/SignIn';
 
 export const PathMobile = (props) => {
@@ -41,6 +42,11 @@ export const PathMobile = (props) => {
 					<Route 
 						path="/mark-attendance"  
 						render={() => authenticated ? <Markattendance key={Date.now()}/> : <SignIn  key={Date.now()}/>}    
+						exact 
+					/>
+					<Route 
+						path="/schedule"  
+						render={() => authenticated ? <Schedule key={Date.now()}/> : <SignIn  key={Date.now()}/>}    
 						exact 
 					/>
 				</Switch>

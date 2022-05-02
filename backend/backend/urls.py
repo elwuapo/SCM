@@ -37,13 +37,14 @@ urlpatterns = [
     path('api/v1/signout/all/', KnoxViews.LogoutAllView.as_view()), # POST
 
     # ACCOUNT
-    path('api/v1/account/', AccountAPI.as_view()),                  # POST, PUT, DELETE
+    path('api/v1/account/', AccountAPI.as_view()),                  # GET, POST, PUT, DELETE
 
     # BUSINESS
     path('api/v1/business/<int:pk>/', BusinessAPI.as_view()),       # GET
 
     # MARK
-    path('api/v1/mark/', MarkAPI.as_view()),                        # GET, POST
+    path('api/v1/mark/<str:option>/', MarkAPI.as_view()),           # GET
+    path('api/v1/mark/', MarkAPI.as_view()),                        # POST
 ]   
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

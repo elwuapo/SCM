@@ -17,6 +17,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
     "react-swipe-to-delete-ios": "^1.0.11",
+    "react-swipeable-views": "^0.14.0",
+    "react-swipeable-views-utils": "^0.14.0",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.18"

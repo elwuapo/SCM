@@ -25,10 +25,11 @@ class Browser(models.Model):
     os = models.CharField(max_length=20)
 
 class Mark(models.Model):
-    place = models.CharField(max_length=99)
-    check_in_time = models.DateTimeField(auto_now_add=True)
+    employee       = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+    place          = models.CharField(max_length=99)
+    check_in_time  = models.DateTimeField(auto_now_add=True)
     departure_time = models.DateTimeField(null=True, blank=True)
-    browser = models.ForeignKey(Browser, on_delete = models.CASCADE)
+    browser        = models.ForeignKey(Browser, on_delete = models.CASCADE)
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
@@ -47,5 +48,6 @@ class Account(models.Model):
     marks = models.ManyToManyField(Mark, blank = True)
 
 class Business(models.Model):
-    name = models.CharField(max_length=99, blank=True, null=True)
+    name      = models.CharField(max_length=99, blank=True, null=True)
     employees = models.ManyToManyField(Account, blank = True)
+    marks     = models.ManyToManyField(Mark, blank = True)

@@ -45,6 +45,7 @@ export const SignIn = () => {
             case 200:
                 const response = await data.json();
                 cookies.set("user", response.user.username, {path: '/' , expires: new Date(response.expiry), sameSite: "strict"});
+                cookies.set("fullName", response.fullName, {path: '/' , expires: new Date(response.expiry), sameSite: "strict"});
                 cookies.set("token", response.token, {path: '/' , expires: new Date(response.expiry), sameSite: "strict"});
                 cookies.set("role", response.role, {path: '/', expires: new Date(response.expiry), sameSite: "strict"});
                 cookies.set("avatar", response.avatar, {path: '/', expires: new Date(response.expiry), sameSite: "strict"});

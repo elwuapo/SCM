@@ -1,9 +1,3 @@
-from re import A
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
-from knox.auth import TokenAuthentication
-
 # Imports Python
 
 # Imports Django
@@ -13,7 +7,12 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 # Imports Django Library
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from knox.auth import TokenAuthentication
 
+# Api
 from api.models import Account, Business, WorkingHours
 from api.v1.account.AccountSLR import AccountSerializer1
 
@@ -21,8 +20,10 @@ class AccountAPI(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, pk):
+    def get(self, request):
         try:
+            user = request.user
+            
             return Response(status=200)
         except:
             return Response(status=400)

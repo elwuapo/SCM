@@ -15,12 +15,13 @@ export const Markattendance = () => {
     const classes   = white();
     const browser   = detect();
     const browserId = browserID();
+    const cookies   = new Cookies();
+    const fullName  = cookies.get('fullName');
 
     const [loading, setLoading] = useState(true);
     const [photo, setPhoto]     = useState(null);
     const [path, setPath]       = useState(take);
     const [disable, setDisable] = useState(false);
-    const [user, setUser]       = useState({});
     const [mark, setMark]       = useState({});
     const [error, setError]     = useState(false);
 
@@ -30,9 +31,9 @@ export const Markattendance = () => {
     }
 
     const obtener = useCallback( async () => {
-        const header     = new Headers();
-        const cookies    = new Cookies();
-        const token      = cookies.get("token");
+        const header  = new Headers();
+        const cookies = new Cookies();
+        const token   = cookies.get("token");
         header.append("Authorization", "Token " + token);
 
         var request = {
@@ -41,12 +42,11 @@ export const Markattendance = () => {
             redirect: 'follow'
         };
 
-        const data = await fetch(urlApi() + '/api/v1/mark/', request);
+        const data = await fetch(urlApi() + '/api/v1/mark/marking/', request);
 
         switch(data.status){
             case 200:
                 const response = await data.json();
-                setUser(response.employee);
                 setMark(response.mark);
                 setLoading(false);
                 break;
@@ -67,9 +67,11 @@ export const Markattendance = () => {
         const formdata   = new FormData();
         const cookies    = new Cookies();
         const token      = cookies.get("token");
+        const businessId = cookies.get("businessId");
 
         header.append("Authorization", "Token " + token);
 
+        formdata.append("business_id", businessId);
         formdata.append("b_id", browserId);
         formdata.append("b_name", browser.name);
         formdata.append("b_os", browser.os);
@@ -160,7 +162,7 @@ export const Markattendance = () => {
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell>Name</TableCell>
-                                                <TableCell>{user.first_name + ' ' + user.last_name}</TableCell>
+                                                <TableCell>{fullName}</TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell>Place</TableCell>

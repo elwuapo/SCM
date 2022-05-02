@@ -1,5 +1,5 @@
 // React
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 // Material-UI
 import { Container, Grid, LinearProgress } from '@material-ui/core';
@@ -10,17 +10,66 @@ import { Container, Grid, LinearProgress } from '@material-ui/core';
 import { Bottombar } from '../../components/bottombar/Bottombar'
 import { Topbar } from '../../components/topbar/Topbar'
 import { white } from './Style';
+import { clearCookies, urlApi } from '../../../setting/Setting';
+import Cookies from 'universal-cookie';
+import { Mark } from '../../components/mark/Mark'
 
 export const Attendance = () => {
     const classes = white();
     
+    const [loading, setLoading] = useState(true);
+    const [marks, setMarks]     = useState([]);
+
+    const obtener = useCallback( async () => {
+        const header     = new Headers();
+        const cookies    = new Cookies();
+        const token      = cookies.get("token");
+        header.append("Authorization", "Token " + token);
+
+        var request = {
+            method: 'GET',
+            headers: header,
+            redirect: 'follow'
+        };
+
+        const data = await fetch(urlApi() + '/api/v1/mark/attendance/', request);
+
+        switch(data.status){
+            case 200:
+                const response = await data.json();
+                //setAccount(response.account);
+                setMarks(response.marks);
+                console.log(response)
+                setLoading(false);
+                break;
+            case 401:
+                clearCookies();
+                break;
+            default:
+                break;
+        };
+    }, []);
+
+    useEffect(() => {
+        document.title = 'Attendance';
+        obtener();
+    }, [obtener])
+
     return (
         <Fragment>
             <Topbar title={'Attendance'}/>
 
             <Container className={classes.container}>
                 <Grid item xs={12} className={classes.contenido}>
-                    <LinearProgress color="primary"/>
+                    { loading ?
+                        <LinearProgress color="primary"/>
+                        :
+                        <Fragment>
+                            { marks.sort((a, b) => b.pk - a.pk).map((mark, index) => 
+                                <Mark key={index} name={mark.employee.first_name + ' ' + mark.employee.last_name} mark={mark}/>
+                            )}
+                        </Fragment>
+                    }
                 </Grid>
             </Container>
 
