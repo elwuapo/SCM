@@ -12,23 +12,37 @@ import EventIcon from '@material-ui/icons/Event';
 // Files
 
 import { white } from './Style';
+import Cookies from 'universal-cookie';
 
 export const Bottombar = (props) => {
     const classes = white();
+    const cookies = new Cookies();
+    const role    = cookies.get('role');
+    
     const [value, setValue] = useState(props.index);
 
     return (
         <Fragment>
             <BottomNavigation
                 value={value}
-                onChange={(event, newValue) => setValue(newValue)}
+                onChange={(newValue) => setValue(newValue)}
                 showLabels
                 className={classes.root}
             >
             
-                <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => window.location.href = "/"}/>
-                <BottomNavigationAction label="Business" icon={<BusinessIcon />} onClick={() => window.location.href = "/business"}/>
-                <BottomNavigationAction label="Attendance" icon={<EventIcon />} onClick={() => window.location.href = "/attendance"}/>
+                
+                { role === 'manager' ?
+                    <Fragment>
+                        <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => window.location.href = "/"}/>
+                        <BottomNavigationAction label="Business" icon={<BusinessIcon />} onClick={() => window.location.href = "/business"}/>
+                        <BottomNavigationAction label="Attendance" icon={<EventIcon />} onClick={() => window.location.href = "/attendance"}/>
+                    </Fragment>
+                    :
+                    <Fragment>
+                        <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => window.location.href = "/"}/>
+                    </Fragment>
+                }
+                
             </BottomNavigation>
         </Fragment>
     )
