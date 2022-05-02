@@ -2,7 +2,8 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 // Material-UI
-import { Container, Grid, LinearProgress } from '@material-ui/core';
+import { Container, Grid, LinearProgress, Paper, Tab, Tabs } from '@material-ui/core';
+import { TabContext, TabPanel } from '@material-ui/lab';
 
 // Library
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -15,13 +16,19 @@ import { Employee } from '../../components/employee/Employee';
 import { Add } from '../../components/modal/employee/Add';
 import Cookies from 'universal-cookie';
 import { clearCookies, urlApi } from '../../../setting/Setting';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const Business = () => {
     const classes = white();
 
     const [loading, setLoading]     = useState(true);
+    const [valor, setValor]         = useState('0');
     const [business, setBusiness]   = useState({});
     const [employees, setEmployees] = useState([]);
+
+    const cambiarTabla = (event, posicion) => {
+        setValor(posicion);
+    };
 
     const obtener = useCallback( async () => {
         const header     = new Headers();
@@ -61,31 +68,64 @@ export const Business = () => {
 
     return (
         <Fragment>
-             <Topbar title={'Business'}/>
+             <Topbar title={'Business'} table={true}/>
 
             <Container className={classes.container}>
-                <Grid item xs={12} className={classes.contenido}>
+                <Grid item xs={12}>
                     { loading ?
                         <LinearProgress color="primary"/>
                         :
                         <Fragment>
-                            <h3 className={classes.title}>
-                                List of employees {business.name}<Add setEmployees={setEmployees}/>
-                            </h3>
+                            <TabContext value={valor}>
+                                <Paper className={classes.table}>
+                                    <Tabs
+                                        className={classes.columna}
+                                        value={valor}
+                                        onChange={cambiarTabla}
+                                        indicatorColor="primary"
+                                        TabIndicatorProps={loading ? {color: ''} : {className: classes.indicador}}
+                                        variant={"fullWidth"}
+                                        centered
+                                    >
+                                        <Tab label={business.name} value={'0'} style={{width: '50%'}} disabled={loading}/>
+                                        <Tab label={'List of employees'} value={'1'} style={{width: '50%'}} disabled={loading}/>
+                                    </Tabs>
+                                </Paper>
 
-                            { employees.map((employee, index) => 
-                                <Employee key={index} employee={employee} setEmployees={setEmployees} employees={employees}/>
-                            )}
+                                <TabPanel value={'0'} style={{padding: 0}}>
+                                    { loading ?
+                                        <LinearProgress color="secondary"/>
+                                        :
+                                        <Fragment>
+                                            <LazyLoadImage
+                                                //className={classes.banner}
+                                                effect='blur'
+                                                alt={'img-business'}
+                                                src={'https://i.ytimg.com/vi/E15HFmxwVQI/maxresdefault.jpg'} 
+                                                width={'100%'}
+                                            />
+                                        </Fragment>
+                                    }
+                                </TabPanel>
+
+                                <TabPanel value={'1'} style={{padding: 0}}>
+                                    { loading ?
+                                        <LinearProgress color="secondary"/>
+                                        :
+                                        <Fragment>
+                                            { employees.map((employee, index) => 
+                                                <Employee key={index} employee={employee} setEmployees={setEmployees} employees={employees}/>
+                                            )}
+
+                                            <Add setEmployees={setEmployees}/>
+                                        </Fragment>
+                                    }
+                                </TabPanel>
+                            </TabContext>
                         </Fragment>
                     }
                     {/*
-                        <LazyLoadImage
-                            //className={classes.banner}
-                            effect='blur'
-                            alt={'img-business'}
-                            src={'https://i.ytimg.com/vi/E15HFmxwVQI/maxresdefault.jpg'} 
-                            width={'100%'}
-                        />
+                        
                     */}
                 </Grid>
             </Container>

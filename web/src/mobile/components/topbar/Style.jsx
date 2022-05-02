@@ -7,10 +7,15 @@ export const style = makeStyles((theme) => ({
         height: '57px',
         boxShadow: 'none',
     },
-    toolbar:{
+    toolbar1:{
         height: '57px',
         background: '#fff',
         borderBottom: '1px solid rgba(0,0,0,0.1)',
+    },
+    toolbar2:{
+        height: '57px',
+        background: '#fff',
+        borderBottom: '1px solid rgba(0,0,0,0)',
     },
     menu: {
         marginRight: theme.spacing(2),

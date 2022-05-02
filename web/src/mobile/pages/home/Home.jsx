@@ -9,7 +9,7 @@ export const Home = () => {
 
     return (
         <Fragment>
-            <Topbar title={'Home'}/>
+            <Topbar title={'Home'} table={true}/>
 
             <Container className={classes.container}>
                 <Grid item xs={12} className={classes.contenido}>

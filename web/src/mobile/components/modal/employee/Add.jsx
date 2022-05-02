@@ -1,7 +1,6 @@
-import { Dialog, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, Grid, IconButton, InputLabel, List, ListItem, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@material-ui/core'
+import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, Grid, InputLabel, List, ListItem, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@material-ui/core'
 import React, { Fragment, useState } from 'react'
 import { white } from './Style';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Cookies from 'universal-cookie';
 import { clearCookies, urlApi } from '../../../../setting/Setting';
 
@@ -51,7 +50,7 @@ export const Add = (props) => {
             case 200:
                 const response = await data.json();
                 props.setEmployees((prev) => [...prev, response.account])
-                setOpen(false);
+                canceling();
                 break;
             case 401:
                 clearCookies();
@@ -76,9 +75,11 @@ export const Add = (props) => {
 
     return (
         <Fragment>
-            <IconButton className={classes.add} onClick={() => setOpen(true)}>
-                <PersonAddIcon />
-            </IconButton>
+            <div style={{padding: 10}}>
+                <Button variant="contained" className={classes.add} disabled={disable} onClick={() => setOpen(true)}>
+                    Add employee
+                </Button>
+            </div>
 
             <Dialog
                 open={open} 

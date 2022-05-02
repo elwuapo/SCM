@@ -23,10 +23,11 @@ export const white = makeStyles((theme) => ({
         }
     },
     add:{
-        left: 'calc(100vw -40px)',
-        color: blue[500],
+        width: '100%',
+        background: blue[500],
+        color: grey[50],
         '&:hover':{
-            color: blue[700],
+            background: blue[700],
         }
     },
     modal: {

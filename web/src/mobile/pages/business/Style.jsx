@@ -26,5 +26,15 @@ export const white = makeStyles((theme) => ({
         width: 'calc(100vw - 40px)',
         paddingLeft: 20,
         paddingRight: 20,
-    }
+    },
+    table:{
+        boxShadow: 'none',
+        borderRadius: 0,
+        //background: grey[50],
+        position: 'sticky',
+        color: grey[900],
+        //top: 57,
+        zIndex: 99,
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
+    },
 }));

@@ -68,7 +68,7 @@ export const Schedule = () => {
 
     return (
         <Fragment>
-            <Topbar title={'Schedule'}/>
+            <Topbar title={'Schedule'} table={false}/>
 
             <Container className={classes.container}>
                 <Grid item xs={12}>

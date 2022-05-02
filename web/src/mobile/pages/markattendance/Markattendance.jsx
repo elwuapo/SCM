@@ -112,7 +112,7 @@ export const Markattendance = () => {
 
     return (
         <Fragment>
-            <Topbar title={'Mark attendance'}/>
+            <Topbar title={'Mark attendance'} table={false}/>
 
             <Container className={classes.container}>
                 <Grid item xs={12} className={classes.contenido}>

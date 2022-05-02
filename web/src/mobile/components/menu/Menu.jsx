@@ -18,7 +18,8 @@ import { urlApi } from '../../../setting/Setting';
 export const Menu = () => {
     const classes  = white();
     const cookies  = new Cookies();
-    const username = cookies.get('user');
+    //const username = cookies.get('user');
+    const fullname = cookies.get('fullName');
     const avatar   = cookies.get('avatar');
     const role     = cookies.get('role');
 
@@ -52,7 +53,7 @@ export const Menu = () => {
             <Card className={classes.card}>
                 <CardHeader
                     avatar={<Avatar src={urlApi() + avatar}/>}
-                    title={username}
+                    title={fullname}
                     subheader={role}
                     action={<Exit options={['SignOut', 'SignOut All']}/>}
                 />

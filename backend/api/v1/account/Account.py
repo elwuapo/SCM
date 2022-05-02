@@ -113,6 +113,7 @@ class AccountAPI(APIView):
             account  = Account.objects.get(user = user)
 
             account.delete()
+            user.delet()
             
             return Response(status=200)
         except:
