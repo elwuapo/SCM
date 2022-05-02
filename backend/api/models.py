@@ -48,6 +48,8 @@ class Account(models.Model):
     marks = models.ManyToManyField(Mark, blank = True)
 
 class Business(models.Model):
-    name      = models.CharField(max_length=99, blank=True, null=True)
-    employees = models.ManyToManyField(Account, blank = True)
-    marks     = models.ManyToManyField(Mark, blank = True)
+    name            = models.CharField(max_length=99, blank=True, null=True)
+    employees       = models.ManyToManyField(Account, blank = True)
+    marks           = models.ManyToManyField(Mark, blank = True)
+    external_system = models.BooleanField(default=False)
+    redirect_to     = models.CharField(max_length=999, blank=True, null=True)

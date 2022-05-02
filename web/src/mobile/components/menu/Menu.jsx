@@ -42,7 +42,7 @@ export const Menu = () => {
                     </ListItemIcon>
                     <ListItemText className={classes.icono} primary={'Schedule'}/>
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={() => going('/resume')}>
                     <ListItemIcon className={classes.icono}>
                         <BarChartIcon style={{color: '#9e9e9e'}}/>
                     </ListItemIcon>

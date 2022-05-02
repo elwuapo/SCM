@@ -22,8 +22,6 @@ class AccountAPI(APIView):
 
     def get(self, request):
         try:
-            user = request.user
-            
             return Response(status=200)
         except:
             return Response(status=400)
@@ -113,7 +111,7 @@ class AccountAPI(APIView):
             account  = Account.objects.get(user = user)
 
             account.delete()
-            user.delet()
+            user.delete()
             
             return Response(status=200)
         except:
