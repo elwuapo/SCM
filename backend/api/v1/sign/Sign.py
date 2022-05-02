@@ -34,10 +34,12 @@ class SignIn(LoginView):
 
             response = super(SignIn, self).post(request, format=None)
 
-            response.data['fullName']    = str(user.first_name) + ' ' + str(user.last_name)
-            response.data['role']        = account.role
-            response.data['avatar']      = account.avatar.url
-            response.data['businessId']  = business.pk
+            response.data['fullName']        = str(user.first_name) + ' ' + str(user.last_name)
+            response.data['role']            = account.role
+            response.data['avatar']          = account.avatar.url
+            response.data['businessId']      = business.pk
+            response.data['external_system'] = business.external_system
+            response.data['redirect_to']     = business.redirect_to
 
             return response
         except:

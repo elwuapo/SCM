@@ -58,7 +58,7 @@ export const PathMobile = (props) => {
 					/>
 					<Route 
 						path="/external_system"  
-						render={() => authenticated ? <External key={Date.now()}/> : <SignIn  key={Date.now()}/>}
+						render={() => <External key={Date.now()}/> }    
 						exact 
 					/>
 				</Switch>

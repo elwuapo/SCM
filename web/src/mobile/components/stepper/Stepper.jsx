@@ -247,11 +247,8 @@ export default function VerticalLinearStepper() {
 
   const handleReset = () => {
     setActiveStep(0);
-  };
-
-  const goingTo = () => {
     window.location.href = '/'
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -273,7 +270,7 @@ export default function VerticalLinearStepper() {
                                 <Button
                                     variant="contained"
                                     color="primary"
-                                    onClick={goingTo}
+                                    onClick={handleNext}
                                     className={classes.button}
                                 >
                                     {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
@@ -286,9 +283,9 @@ export default function VerticalLinearStepper() {
         </Stepper>
         {activeStep === steps.length && (
             <Paper square elevation={0} className={classes.resetContainer}>
-                <Typography>All steps completed - you&apos;re finished</Typography>
+                <Typography>Vamos avolver a la pagina princial</Typography>
                 <Button onClick={handleReset} className={classes.button}>
-                    Reset
+                    volver
                 </Button>
             </Paper>
         )}

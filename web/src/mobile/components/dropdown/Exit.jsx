@@ -42,7 +42,7 @@ export const Exit = (props) => {
             redirect: 'follow'
         };
 
-        const data = await fetch(urlApi() + "api/v1/signout/", request);
+        const data = await fetch(urlApi() + "/api/v1/signout/", request);
 
         switch(data.status){
             case 204:
