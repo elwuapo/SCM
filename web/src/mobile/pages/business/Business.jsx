@@ -101,31 +101,20 @@ export const Business = () => {
                                                 //className={classes.banner}
                                                 effect='blur'
                                                 alt={'img-business'}
-                                                src={'https://i.ytimg.com/vi/E15HFmxwVQI/maxresdefault.jpg'} 
+                                                src={urlApi() + business.image} 
                                                 width={'100%'}
                                             />
 
                                             <h3 className={classes.title}>{business.name}</h3>
 
-                                            <p style={{paddingLeft: 20, paddingRight: 20}}>
-                                                <b>Us:</b> Somos una empresa experta en la gestión de la fuerza laboral,  
-                                                20 años de experiencia en las problemáticas latinoamericanas 
-                                                nos entregan el conocimiento, y nuestra alianza con UKG, líder
-                                                mundial en el nicho, nos da la tecnología para abordar los 
-                                                desafíos del WorkForce Management cómo ningún otro en la región.
-                                                <br />
-                                                <br />
-                                                SCM es la única firma latinoamericana que aborda la gestión de 
-                                                la fuerza laboral en su totalidad, desde la recolección del marcaje 
-                                                de asistencia, pasando por el control del tiempo para un pago 
-                                                perfecto y generación de horarios optimizados, hasta la 
-                                                consultoría en productividad laboral y mejora de procesos para así, 
-                                                uniendo conocimiento y tecnología, capitalizar oportunidades de 
-                                                ahorro que derivan de la gestión de la fuerza laboral. Somos un 
-                                                equipo multidisciplinario de gran experiencia, con casos de éxito 
-                                                implementando UKG en las más grandes compañías de latinoamérica, 
-                                                preparado para abordar las oportunidades específicas, sin importar 
-                                                la industria, ni el país en donde el cliente esté situado.
+                                            <p style={{paddingLeft: 20, paddingRight: 20, textAlign: 'justify', textJustify: 'inter-word'}}>
+                                                <b>Us: </b> 
+                                                { business.us.split('\r\n').map((item, index) => 
+                                                    <Fragment key={index}>
+                                                        {item}
+                                                        <br/>
+                                                    </Fragment>
+                                                )}
                                             </p>
 
                                             <p style={{paddingLeft: 20, paddingRight: 20}}><b>Quantity of employees:</b> {employees.length}</p>

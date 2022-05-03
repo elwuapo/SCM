@@ -1,5 +1,13 @@
+# Imports Python
+# Imports Django
 from django.contrib.auth.models import User
+
+# Imports Django Library
 from rest_framework import serializers
+
+# Api
+
+
 
 class EmployeeSerializer1(serializers.ModelSerializer):
     username   = serializers.CharField(required = False)

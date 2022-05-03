@@ -1,4 +1,9 @@
+# Imports Python
+# Imports Django
+# Imports Django Library
 from rest_framework import serializers
+
+# Api
 from api.models import Mark
 from api.v1.browser.BrowserSLR import BrowserSerializer1
 from api.v1.employee.EmployeeSLR import EmployeeSerializer1

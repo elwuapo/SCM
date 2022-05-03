@@ -1,4 +1,9 @@
+# Imports Python
+# Imports Django
+# Imports Django Library
 from rest_framework import serializers
+
+# Api
 from api.models import WorkingHours
 from api.v1.workday.WorkDaySLR import WorkDaySerializer1
 

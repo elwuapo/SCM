@@ -1,5 +1,9 @@
+# Imports Python
+# Imports Django
+# Imports Django Library
 from rest_framework import serializers
 
+# Api
 from api.models import Account
 from api.v1.employee.EmployeeSLR import EmployeeSerializer1
 from api.v1.workinghours.WorkingHoursSLR import WorkingHoursSerializer1

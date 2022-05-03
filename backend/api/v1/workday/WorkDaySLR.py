@@ -1,4 +1,9 @@
+# Imports Python
+# Imports Django
+# Imports Django Library
 from rest_framework import serializers
+
+# Api
 from api.models import WorkDay
 
 class WorkDaySerializer1(serializers.ModelSerializer):

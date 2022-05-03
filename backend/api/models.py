@@ -53,3 +53,9 @@ class Business(models.Model):
     marks           = models.ManyToManyField(Mark, blank = True)
     external_system = models.BooleanField(default=False)
     redirect_to     = models.CharField(max_length=999, blank=True, null=True)
+    us              = models.TextField(default='', blank=True, null=True)
+
+    def path(self, filename):
+        return f'business/{self.name}/image/{filename}'
+
+    image = models.ImageField(upload_to = path, null = True, blank = True)

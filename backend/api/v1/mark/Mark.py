@@ -1,22 +1,26 @@
-from datetime import datetime
-from io import BytesIO
+# Imports Python
 import os
+from io import BytesIO
+from datetime import datetime
+
+# Imports Django
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.utils import timezone
+
+# Imports Django Library
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from knox.auth import TokenAuthentication
 
+# Api
 from api.utils import encode_photo, match
-from api.models import Account, Business, Mark
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.utils import timezone
-from api.models import Browser
+from api.models import Account, Browser, Business, Mark
 from api.v1.mark.MarkSLR import MarkSerializer1
 from api.v1.employee.EmployeeSLR import EmployeeSerializer1
 from api.v1.account.AccountSLR import AccountSerializer1
 
 from backend.settings import BASE_DIR
-
 
 class MarkAPI(APIView):
     authentication_classes = (TokenAuthentication,)
