@@ -19,7 +19,7 @@ export const Bottombar = (props) => {
     const cookies = new Cookies();
     const role    = cookies.get('role');
     
-    const [value, setValue] = useState(props.index);
+    const [value, setValue] = useState(parseInt(props.index));
 
     return (
         <Fragment>
@@ -29,20 +29,9 @@ export const Bottombar = (props) => {
                 showLabels
                 className={classes.root}
             >
-            
-                
-                { role === 'manager' ?
-                    <Fragment>
-                        <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => window.location.href = "/"}/>
-                        <BottomNavigationAction label="Business" icon={<BusinessIcon />} onClick={() => window.location.href = "/business"}/>
-                        <BottomNavigationAction label="Attendance" icon={<EventIcon />} onClick={() => window.location.href = "/attendance"}/>
-                    </Fragment>
-                    :
-                    <Fragment>
-                        <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => window.location.href = "/"}/>
-                    </Fragment>
-                }
-                
+                <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => window.location.href = "/"}/>
+                { role === 'manager' ? <BottomNavigationAction label="Business" icon={<BusinessIcon />} onClick={() => window.location.href = "/business"}/> : null }
+                { role === 'manager' ? <BottomNavigationAction label="Attendance" icon={<EventIcon />} onClick={() => window.location.href = "/attendance"}/> : null }
             </BottomNavigation>
         </Fragment>
     )

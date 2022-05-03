@@ -9,8 +9,9 @@ import {changeDateFormat2, getTime } from '../../../setting/Setting';
 import { white } from './Style';
 //'iOS' | 'Android OS' | 'BlackBerry OS' | 'Windows Mobile' | 'Amazon OS' | 'Windows 3.11' | 'Windows 95' | 'Windows 98' | 'Windows 2000' | 'Windows XP' | 'Windows Server 2003' | 'Windows Vista' | 'Windows 7' | 'Windows 8' | 'Windows 8.1' | 'Windows 10' | 'Windows ME' | 'Windows CE' | 'Open BSD' | 'Sun OS' | 'Linux' | 'Mac OS' | 'QNX' | 'BeOS' | 'OS/2' | 'Chrome OS'
 const Header = (props) => {
-    const classes = white();
-    const mark = props.mark;
+    const classes  = white();
+    const mark     = props.mark;
+    const employee = props.employee;
 
     const getOS = () => {
         const os      = mark.browser.os
@@ -29,7 +30,7 @@ const Header = (props) => {
             return(
                 <CardHeader
                     avatar={<Avatar variant="rounded" src={ios}/>}
-                    title={props.name}
+                    title={employee.first_name + ' ' + employee.last_name}
                     subheader={changeDateFormat2(mark.check_in_time)}
                     action={ mark.check_in_time !== null && mark.departure_time !== null ?
                         <Chip className={classes.finalized} label="finalized" variant="outlined" />
@@ -42,7 +43,7 @@ const Header = (props) => {
             return(
                 <CardHeader
                     avatar={<Avatar variant="rounded" src={android}/>}
-                    title={props.name}
+                    title={employee.first_name + ' ' + employee.last_name}
                     subheader={changeDateFormat2(mark.check_in_time)}
                     action={ mark.check_in_time !== null && mark.departure_time !== null ?
                         <Chip className={classes.finalized} label="finalized" variant="outlined" />
@@ -55,7 +56,7 @@ const Header = (props) => {
             return(
                 <CardHeader
                     avatar={<Avatar variant="rounded" src={windows}/>}
-                    title={props.name}
+                    title={employee.first_name + ' ' + employee.last_name}
                     subheader={changeDateFormat2(mark.check_in_time)}
                     action={ mark.check_in_time !== null && mark.departure_time !== null ?
                         <Chip className={classes.finalized} label="finalized" variant="outlined" />
@@ -68,7 +69,7 @@ const Header = (props) => {
             return(
                 <CardHeader
                     avatar={<Avatar variant="rounded" src={linux}/>}
-                    title={props.name}
+                    title={employee.first_name + ' ' + employee.last_name}
                     subheader={changeDateFormat2(mark.check_in_time)}
                     action={ mark.check_in_time !== null && mark.departure_time !== null ?
                         <Chip className={classes.finalized} label="finalized" variant="outlined" />
@@ -81,7 +82,7 @@ const Header = (props) => {
             return(
                 <CardHeader
                     avatar={<Avatar variant="rounded" src={macos}/>}
-                    title={props.name}
+                    title={employee.first_name + ' ' + employee.last_name}
                     subheader={changeDateFormat2(mark.check_in_time)}
                     action={ mark.check_in_time !== null && mark.departure_time !== null ?
                         <Chip className={classes.finalized} label="finalized" variant="outlined" />
@@ -100,12 +101,12 @@ const Header = (props) => {
 }
 
 export const Mark = (props) => {
-    //const classes = white();
+    const classes = white();
 
     return (
         <Fragment>
-            <Card>
-                <Header mark={props.mark} name={props.name}/>
+            <Card className={props.type === 1 ? classes.card1 : classes.card2}>
+                <Header mark={props.mark} employee={props.employee}/>
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         <b>Check in time</b>: {props.mark.check_in_time !== null ? getTime(props.mark.check_in_time) : ''}

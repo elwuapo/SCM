@@ -116,26 +116,30 @@ export const Schedule = () => {
                                 enableMouseEvents
                             >
                                 { marks.sort((a, b) => b.pk - a.pk).map((mark, index) => 
-                                    <Mark key={index} name={mark.employee.first_name + ' ' + mark.employee.last_name} mark={mark}/>
+                                    <Mark key={index} employee={mark.employee} mark={mark}/>
                                 )}
                             </AutoPlaySwipeableViews>
-
-                            <MobileStepper
-                                variant="dots"
-                                steps={marks.length >= 6 ? 6 : marks.length}
-                                position="static"
-                                activeStep={activeStep}
-                                nextButton={
-                                    <Button size="small" onClick={next} disabled={activeStep === (marks.length >= 6 ? 5 : marks.length -1)}>
-                                        Next
-                                    </Button>
-                                }
-                                backButton={
-                                    <Button size="small" onClick={back} disabled={activeStep === 0}>
-                                        Back
-                                    </Button>
-                                }
-                            />
+                            
+                            { marks.length === 0 ?
+                                null
+                                :
+                                <MobileStepper
+                                    variant="dots"
+                                    steps={marks.length >= 6 ? 6 : marks.length}
+                                    position="static"
+                                    activeStep={activeStep}
+                                    nextButton={
+                                        <Button size="small" onClick={next} disabled={activeStep === (marks.length >= 6 ? 5 : marks.length -1)}>
+                                            Next
+                                        </Button>
+                                    }
+                                    backButton={
+                                        <Button size="small" onClick={back} disabled={activeStep === 0}>
+                                            Back
+                                        </Button>
+                                    }
+                                />
+                            }
                         </div>
                     }
                 </Grid>

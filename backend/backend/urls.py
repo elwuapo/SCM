@@ -9,6 +9,7 @@ from knox import views as KnoxViews
 from api.v1.business.Business import BusinessAPI
 from api.v1.account.Account import AccountAPI
 from api.v1.mark.Mark import MarkAPI
+from api.v1.workinghours.WorkingHours import WorkingHoursAPI
 
 urlpatterns = [
     #ADMIN
@@ -30,6 +31,9 @@ urlpatterns = [
     # MARK
     path('api/v1/mark/<str:option>/', MarkAPI.as_view()),           # GET
     path('api/v1/mark/', MarkAPI.as_view()),                        # POST
+
+    # WORKING HOURS
+    path('api/v1/workinghours/', WorkingHoursAPI.as_view()),                # GET
 ]   
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

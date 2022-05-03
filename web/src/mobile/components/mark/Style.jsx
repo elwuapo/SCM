@@ -11,6 +11,19 @@ export const white = makeStyles((theme) => ({
         marginTop: 10,
         color: red[500],
         borderColor: red[500],
+    },
+    card1:{
+        width: '100%',
+        boxShadow: 'none',
+        background: '#fff',
+        borderRadius: 0,
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
+    },
+    card2:{
+        margin: 2,
+        background: '#fff',
+        //width: 'calc(100% - 2px)',
+        //border: '1px solid rgba(0,0,0,0.2)',
     }
 }));
 

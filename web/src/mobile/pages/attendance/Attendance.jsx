@@ -39,7 +39,6 @@ export const Attendance = () => {
                 const response = await data.json();
                 //setAccount(response.account);
                 setMarks(response.marks);
-                console.log(response)
                 setLoading(false);
                 break;
             case 401:
@@ -66,7 +65,7 @@ export const Attendance = () => {
                         :
                         <Fragment>
                             { marks.sort((a, b) => b.pk - a.pk).map((mark, index) => 
-                                <Mark key={index} name={mark.employee.first_name + ' ' + mark.employee.last_name} mark={mark}/>
+                                <Mark key={index} employee={mark.employee} mark={mark} type={1}/>
                             )}
                         </Fragment>
                     }
